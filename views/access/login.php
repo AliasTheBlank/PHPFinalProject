@@ -20,5 +20,6 @@
             <input type="submit" value="Register" name="send">
         </form>
         
+        <a href="./register.php">Don't have an account? Log in!</a>
     </body>
 </html>
