@@ -1,6 +1,7 @@
 <?php
 // Game 1
 $letters = array(); 
+//hola
 
 for ($i = 0; $i <= 6; $i++) {
   $letters[$i] = chr(rand(26)); 
