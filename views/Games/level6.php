@@ -2,7 +2,11 @@
     include_once ("../header.php"); 
     include_once ("../functions.php"); 
     include_once ("../footer.php");
+
+    if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
     
+    var_dump($_SESSION['livesUsed']);
     CheckLost();
     
     ?>
@@ -53,16 +57,14 @@
                 
                 echo "<br>";
                 if (count($arrayAnswerNumber) == 2 && $arrayAnswerNumber[0] == $number[0] && $arrayAnswerNumber[1] == $number[5]) {
-                    echo "congratulation for winning";
-                    ?> <a href="level1.php">Play again</a> <?php
-                    ?> <a href="../access/login.php">Home page</a> <?php
+                    ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/congratulations.php"> <?php
                     // sing out
                 }
                 else {
                     echo "fail";
                     // the player lies - 1;
                     $_SESSION['livesUsed'] += 1;
-                    ?> <a href="level5.php">Try again?</a> <?php
+                    ?> <a href="level6.php">Try again?</a> <?php
                 }
                 ?>
                 

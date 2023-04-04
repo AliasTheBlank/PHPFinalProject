@@ -11,7 +11,6 @@
 
         <div>
 
-        <h1>You have won!</h1>
         <a href="./login">Log out?</a> <br>
         <a href="../Games/level1.php">Try again?</a>
 

@@ -3,6 +3,11 @@
     include_once ("../functions.php"); 
     include_once ("../footer.php");
 
+    if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
+
+
+    var_dump($_SESSION['livesUsed']);
     CheckLost();
 ?>
 
@@ -54,7 +59,7 @@
                 echo "<br>";
                 if (count($arrayAnswer) == 2 && $arrayAnswer[0] == $letters[0] && $arrayAnswer[1] == $letters[5]) {
                     echo "congrats";
-                    // add result to player
+                    $_SESSION['level'] += 1;
                     ?> <a href="level6.php">Go the Next Level</a> <?php
                 }
                 else {

@@ -2,6 +2,11 @@
     include_once ("../header.php");
     include_once ("../functions.php"); 
     include_once ("../footer.php");
+
+    if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
+
+    WinGame();
 ?>
 
 <!DOCTYPE html>

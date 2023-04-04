@@ -1,5 +1,5 @@
 <?php
-    include_once ("../Classes/Db.php");
+    include_once ("../../Classes/Db.php");
 
     function GenerateLetter() {
         $myArray = array();
@@ -43,7 +43,7 @@
 
     function AddScore($result) {
         $dbHander = DataBaseHandler::Connection();
-        $dbHander->OpenConection();
+        $dbHander->OpenConnection();
         $dbHander->ConnectToDB("Kidsgame");
         $connection = $dbHander->getDataBase();
 
@@ -53,11 +53,17 @@
         $lives = $_SESSION['livesUsed'];
         $registrationOrder = $_SESSION['registrationOrder'];
         $connection->query("INSERT INTO score VALUES ('".$Time."', '".$result."', '".$lives."', '".$registrationOrder."')");
-        session_destroy();
+    }
+
+    function ResetStats() {
+        $_SESSION['livesUsed'] = 0;
+        $_SESSION['level'] = 1;
     }
 
     function CheckTries() {
-        if ($_SESSION['livesUsed'] < 6)
+
+
+        if (session_status() === PHP_SESSION_ACTIVE && $_SESSION['livesUsed'] < 6)
             return true;
         
         else 

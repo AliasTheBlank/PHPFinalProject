@@ -1,8 +1,12 @@
 <?php include_once ("../header.php"); 
     include_once ("../functions.php");
     include_once ("../footer.php");
+
+    if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
     
     CheckLost();
+    var_dump($_SESSION['livesUsed']);
     ?>
 
 <!DOCTYPE html>
@@ -53,6 +57,7 @@
                 echo "<br>";
                 if ($letters === $arrayAnswer) {
                     echo "congrats";
+                    $_SESSION['level'] += 1;
                     ?> <a href="level3.php">Go the Next Level</a> <?php
                 }
                 else {
