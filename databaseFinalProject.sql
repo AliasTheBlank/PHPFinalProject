@@ -9,14 +9,15 @@ CREATE TABLE player(
     registrationTime DATETIME NOT NULL,
     id VARCHAR(200) GENERATED ALWAYS AS (CONCAT(UPPER(LEFT(fName,2)),UPPER(LEFT(lName,2)),UPPER(LEFT(userName,3)),CAST(registrationTime AS SIGNED))),
     registrationOrder INTEGER AUTO_INCREMENT,
+    password VARCHAR(255) NOT NULL,
     PRIMARY KEY (registrationOrder)
 )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
 
-CREATE TABLE authenticator(   
+/* CREATE TABLE authenticator(   
     passCode VARCHAR(255) NOT NULL,
     registrationOrder INTEGER, 
     FOREIGN KEY (registrationOrder) REFERENCES player(registrationOrder)
-)CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
+)CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; */
 
 CREATE TABLE score( 
     scoreTime DATETIME NOT NULL, 
@@ -24,7 +25,7 @@ CREATE TABLE score(
     livesUsed INTEGER NOT NULL,
     registrationOrder INTEGER, 
     FOREIGN KEY (registrationOrder) REFERENCES player(registrationOrder)
-)CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
+)CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 CREATE VIEW history AS
 SELECT s.scoreTime, p.id, p.fName, p.lName, s.result, s.livesUsed 

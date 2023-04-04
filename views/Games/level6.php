@@ -47,10 +47,16 @@
 
                 
                 echo "<br>";
-                if (count($arrayAnswerNumber) == 2 && $arrayAnswerNumber[0] == $number[0] && $arrayAnswerNumber[1] == $number[5])
-                    echo "congrats";
-                else 
+                if (count($arrayAnswerNumber) == 2 && $arrayAnswerNumber[0] == $number[0] && $arrayAnswerNumber[1] == $number[5]) {
+                    echo "congratulation for winning";
+                    ?> <a href="level1.php">Play again</a> <?php
+                    ?> <a href="../access/login.php">Home page</a> <?php
+                    // sing out
+                }
+                else {
                     echo "fail";
+                    // the player lies - 1;
+                }
                 ?>
                 
             <?php } ?>

@@ -50,10 +50,16 @@
 
                 
                 echo "<br>";
-                if (count($arrayAnswer) == 2 && $arrayAnswer[0] == $letters[0] && $arrayAnswer[1] == $letters[5])
+                if (count($arrayAnswer) == 2 && $arrayAnswer[0] == $letters[0] && $arrayAnswer[1] == $letters[5]) {
                     echo "congrats";
-                else 
+                    // add result to player
+                    ?> <a href="level6.php">Go the Next Level</a> <?php
+                }
+                else {
                     echo "fail";
+                    // the player lies - 1 
+                    ?> <a href="level5.php">Try again</a> <?php
+                }
                 ?>
                 
             <?php } ?>

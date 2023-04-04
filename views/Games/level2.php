@@ -48,10 +48,15 @@
 
                 
                 echo "<br>";
-                if ($letters === $arrayAnswer)
+                if ($letters === $arrayAnswer) {
                     echo "congrats";
-                else 
+                    ?> <a href="level3.php">Go the Next Level</a> <?php
+                }
+                else {
                     echo "fail";
+                    // the player lies - 1;
+                    ?> <a href="level2.php">Try again</a> <?php
+                }
                 ?>
                 
             <?php } ?>
