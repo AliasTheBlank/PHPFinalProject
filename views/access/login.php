@@ -14,11 +14,20 @@
             $usercreated = $_GET['usercreated'];
         }
 
+        $passwordchange = false;
+        if (isset($_GET['passwordchange'])) {
+            $passwordchange = $_GET['passwordchange'];
+        }
+
         if (!isset($_POST['send'])) {
 
             if ($usercreated) {
             ?>  <h1>User created</h1> <?php
-        }
+            }
+
+            if ($passwordchange) {
+                ?>  <h1>Password change</h1> <?php
+            }
         ?>
         <form action="login.php" method="post">
             <label>
@@ -34,7 +43,8 @@
             <input type="submit" value="Login" name="send">
         </form>
         
-        <a href="./register.php">Don't have an account? Sing up!</a>
+        <a href="./register.php">Don't have an account? Sing up!</a> <br>
+        <a href="./changePassword.php">Forgot your password? Change it!</a>
 
         <?php } else {
 
@@ -47,14 +57,15 @@
             $userName = $_POST['username'];
             $password = $_POST['password'];
 
-            $result = $connection->query("Select count(*), id from player where userName = '".$userName."' and password = '".$password."'");
+            $result = $connection->query("Select count(*), registrationOrder from player where userName = '".$userName."' and password = '".$password."'");
 
             $each_row = $result->fetch_array(MYSQLI_ASSOC);
             
             if ($each_row['count(*)'] == 1) {
                 session_start();
-                $_SESSION["id"] = $each_row["id"];
+                $_SESSION["registrationOrder"] = $each_row["registrationOrder"];
                 $_SESSION["livesUsed"] = 0;
+                $_SESSION['level'] = 1;
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../Games/level1.php"> <?php
             }
             else{

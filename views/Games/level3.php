@@ -1,6 +1,9 @@
 <?php include_once ("../header.php"); 
     include_once ("../functions.php"); 
-    include_once ("../footer.php");?>
+    include_once ("../footer.php");
+    
+    CheckLost();
+    ?>
 
 <!DOCTYPE html>
 <html>
@@ -53,6 +56,8 @@
                 else {
                     echo "fail";
                     // the player lies - 1;
+                    $_SESSION['livesUsed'] += 1;
+
                     ?> <a href="level3.php">Try again</a> <?php
 
                 }

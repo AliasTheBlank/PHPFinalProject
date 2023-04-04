@@ -1,5 +1,5 @@
 <?php
-
+    include_once ("../Classes/Db.php");
 
     function GenerateLetter() {
         $myArray = array();
@@ -25,4 +25,55 @@
         return $myArray;
     }
 
+    function LossGame() {
+        
+        AddScore('failure');
+        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level1.php"> <?php
+    }
+
+    function IncompleteGame() {
+        AddScore('incomplete');
+        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/login.php"> <?php
+    }
+
+    function WinGame() {
+        AddScore('success');
+        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/congratulations.php"> <?php
+    }
+
+    function AddScore($result) {
+        $dbHander = DataBaseHandler::Connection();
+        $dbHander->OpenConection();
+        $dbHander->ConnectToDB("Kidsgame");
+        $connection = $dbHander->getDataBase();
+
+        date_default_timezone_set('America/Toronto');
+        $Time = date("Y-m-d h:i:sa");
+
+        $lives = $_SESSION['livesUsed'];
+        $registrationOrder = $_SESSION['registrationOrder'];
+        $connection->query("INSERT INTO score VALUES ('".$Time."', '".$result."', '".$lives."', '".$registrationOrder."')");
+        session_destroy();
+    }
+
+    function CheckTries() {
+        if ($_SESSION['livesUsed'] < 6)
+            return true;
+        
+        else 
+            return false;
+
+    }
+
+    function CheckLost() {
+        if (!CheckTries()) {
+            LostCase();
+        }
+
+    }
+
+    function LostCase() {
+        LossGame();
+        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/lost.php"> <?php
+    }
 ?>

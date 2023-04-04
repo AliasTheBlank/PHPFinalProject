@@ -13,7 +13,7 @@
         
         if (isset($_GET['validation']))
             $validation = $_GET['validation'];
-        
+
         $userexist = false;
         if (isset($_GET['userexist']))
             $userexist = $_GET['userexist'];
@@ -24,20 +24,10 @@
                 }
 
                 if ($userexist) {
-                    ?> <h1>This username already exists</h1> <?php
+                    ?> <h1>This username doesn't exists</h1> <?php
                 }
                 ?>
-            <form action="register.php" method="post">
-                <label >
-                    <p>Name:</p>
-                    <input type="text" name="fName" required="require">
-                </label>    
-            
-                <label >
-                    <p>Last name:</p>
-                    <input type="text" name="lName" required="require">
-                </label>
-            
+            <form action="changePassword.php" method="post">
                 <label>
                     <p>Username:</p>
                     <input type="text" required="require" name="username">
@@ -52,12 +42,12 @@
                     <p>Confirm Password</p>
                     <input type="password" name="confirmpassword" required="require">
                 </label>
-
-                <input type="submit" value="Register" name="send">
+                <br>
+                <input type="submit" value="Change password" name="send">
             </form>
             
             <a href="./login.php">Already have an account? Log in!</a> <br>
-            <a href="./changePassword.php">Forgot your password? Change it!</a>
+            <a href="./register.php">Don't have an account? Sing up!</a>
 
         <?php } else { 
 
@@ -74,30 +64,21 @@
 
             $username = $_POST['username'];
 
-            //var_dump("Select count(*) from kidsgame.player where userName = '".$username."'"); 
-        
-            
-
             $result = $connection->query("Select count(*) from player where userName = '".$username."'");
             //exit();
             $each_row = $result->fetch_array(MYSQLI_ASSOC);
 
-            if ($each_row['count(*)'] == 1) {
+            if ($each_row['count(*)'] == 0) {
                 unset($_POST['send']);
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=register.php?userexist=true"> <?php
             }
 
             else {
             $password = $_POST['password'];
-            $fName = $_POST['fName'];
-            $lName = $_POST['lName'];
-            date_default_timezone_set('America/Toronto');
-            $registrationTime = date("Y-m-d h:i:sa");
 
-            $value = $connection->query("INSERT INTO player(fName, lName, userName, registrationTime, password)
-            VALUES('".$fName."', '".$lName."', '".$username."', '".$registrationTime."', '".$password."')");
+            $value = $connection->query("UPDATE player SET password = '".$password."' where userName = '".$username."'");
 
-            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?usercreated=true"> <?php
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?passwordchange=true"> <?php
             }
         } ?>
     </body>
