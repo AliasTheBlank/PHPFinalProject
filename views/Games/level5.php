@@ -7,7 +7,7 @@
     session_start();
 
 
-    var_dump($_SESSION['livesUsed']);
+    //var_dump($_SESSION['livesUsed']);
     CheckLost();
 ?>
 
