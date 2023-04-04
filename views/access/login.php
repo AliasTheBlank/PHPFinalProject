@@ -1,3 +1,4 @@
+<?php require_once "../../Classes/Db.php"; ?>
 <!DOCTYPE html>
 <html>
     <head><title>Final Project</title></head>
@@ -19,7 +20,7 @@
             ?>  <h1>User created</h1> <?php
         }
         ?>
-        <form action="main.php" method="post">
+        <form action="login.php" method="post">
             <label>
                 <p>Username:</p>
                 <input type="text" required="require" name="username">
@@ -30,11 +31,38 @@
                 <input type="text" name="password" required="require">
             </label>
 
-            <input type="submit" value="Register" name="send">
+            <input type="submit" value="Login" name="send">
         </form>
         
         <a href="./register.php">Don't have an account? Sing up!</a>
 
-        <?php } else {} ?>
+        <?php } else {
+
+
+            $dbHandler = DataBaseHandler::Connection();
+            $dbHandler->OpenConnection();
+            $dbHandler->connectToDB("kidsGame");
+            $connection = $dbHandler->getDataBase();
+
+            $userName = $_POST['username'];
+            $password = $_POST['password'];
+
+            $result = $connection->query("Select count(*), id from player where userName = '".$userName."' and password = '".$password."'");
+
+            $each_row = $result->fetch_array(MYSQLI_ASSOC);
+            
+            if ($each_row['count(*)'] == 1) {
+                session_start();
+                $_SESSION["id"] = $each_row["id"];
+                $_SESSION["livesUsed"] = 0;
+                ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../Games/level1.php"> <?php
+            }
+            else{
+                ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php"> <?php
+            }
+            
+
+
+        } ?>
     </body>
 </html>

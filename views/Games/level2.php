@@ -16,7 +16,7 @@
                 }
                 ?>
 
-                <form action="level2" method="post" id="form1">
+                <form action="level2.php" method="post" id="form1">
 
                     <input type="text" name="answer" id="inputanswer" placeholder="Your answer">
 
@@ -39,7 +39,7 @@
 
                 echo "<br>";
                 $answer = $_POST['answer'];
-                $arrayAnswer = explode(",", $answer);
+                $arrayAnswer = explode(" ", $answer);
 
                 for ($i = 0; $i < count($arrayAnswer); $i++) {
                     $arrayAnswer[$i] = str_replace(' ', '', $arrayAnswer[$i]);

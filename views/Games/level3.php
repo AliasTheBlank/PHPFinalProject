@@ -15,7 +15,7 @@
                 }
                 ?>
 
-                <form action="level3" method="post" id="form1">
+                <form action="level3.php" method="post" id="form1">
 
                     <input type="text" name="answer" id="inputanswer" placeholder="Your answer please">
 
@@ -37,7 +37,7 @@
                     echo $numbers[$i] . " ";
                 }
                 echo "<br>";
-                $arrayAnswer = explode(",", $_POST['answer']);
+                $arrayAnswer = explode(" ", $_POST['answer']);
                 $arrayAnswerNumber = array();
 
                 for ($i = 0; $i < count($arrayAnswer); $i++) {
