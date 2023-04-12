@@ -2,6 +2,7 @@
     include_once ("../functions.php"); 
     include_once ("../footer.php");
     
+    CheckSession();
     CheckLost();
     ?>
 
@@ -51,6 +52,7 @@
                 echo "<br>";
                 if ($numbers === $arrayAnswerNumber) {
                     echo "congrats";
+                    $_SESSION['level'] += 1;
                     ?> <a href="level4.php">Go the Next Level</a> <?php
                 }
                 else {

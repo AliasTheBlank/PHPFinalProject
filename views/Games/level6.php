@@ -3,6 +3,8 @@
     include_once ("../functions.php"); 
     include_once ("../footer.php");
     
+    CheckSession();
+    CheckCorrectLevel(3);
     CheckLost();
     
     ?>
@@ -53,9 +55,8 @@
                 
                 echo "<br>";
                 if (count($arrayAnswerNumber) == 2 && $arrayAnswerNumber[0] == $number[0] && $arrayAnswerNumber[1] == $number[5]) {
-                    echo "congratulation for winning";
-                    ?> <a href="level1.php">Play again</a> <?php
-                    ?> <a href="../access/login.php">Home page</a> <?php
+                    $_SESSION['level'] += 1;
+                    ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/congratulations.php"> <?php
                     // sing out
                 }
                 else {
