@@ -12,7 +12,7 @@
         <div>
 
         <a href="./login">Log out?</a> <br>
-        <a href="../Games/level1.php">Try again?</a>
+        <a href="./restart.php">Try again?</a>
 
 
         </div>

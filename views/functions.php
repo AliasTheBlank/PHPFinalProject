@@ -28,7 +28,6 @@
     function LossGame() {
         
         AddScore('failure');
-        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level1.php"> <?php
     }
 
     function IncompleteGame() {
@@ -53,6 +52,7 @@
         $lives = $_SESSION['livesUsed'];
         $registrationOrder = $_SESSION['registrationOrder'];
         $connection->query("INSERT INTO score VALUES ('".$Time."', '".$result."', '".$lives."', '".$registrationOrder."')");
+
     }
 
     function ResetStats() {
@@ -81,5 +81,17 @@
     function LostCase() {
         LossGame();
         ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/lost.php"> <?php
+    }
+
+    function CheckSession() {
+        if (!isset($_SESSION['registrationOrder'])) {
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/login.php"> <?php
+        }
+    }
+
+    function CheckCorrectLevel(int $level) {
+        if ($_SESSION['level'] != $level) {
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../main.php"> <?php
+        }
     }
 ?>

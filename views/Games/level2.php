@@ -5,6 +5,8 @@
     if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
     
+    CheckSession();
+    CheckCorrectLevel(2);
     CheckLost();
     //var_dump($_SESSION['livesUsed']);
     ?>

@@ -63,6 +63,7 @@
             
             if ($each_row['count(*)'] == 1) {
                 session_start();
+
                 $_SESSION['registrationOrder'] = $each_row["registrationOrder"];
                 $_SESSION['livesUsed'] = 0;
                 $_SESSION['level'] = 1;

@@ -6,6 +6,8 @@
     session_start();
 
     
+    CheckSession();
+    CheckCorrectLevel(3);
     CheckLost();
     //var_dump($_SESSION['livesUsed']);
     ?>
