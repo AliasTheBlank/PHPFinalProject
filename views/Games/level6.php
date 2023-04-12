@@ -59,7 +59,7 @@
 
                 
                 echo "<br>";
-                if (count($arrayAnswerNumber) == 2 && $arrayAnswerNumber[0] == $number[0] && $arrayAnswerNumber[1] == $number[5]) 
+                if (count($arrayAnswerNumber) == 2 && $arrayAnswerNumber[0] == $number[0] && $arrayAnswerNumber[1] == $number[5]) { 
                     $_SESSION['level'] += 1;
                     ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/congratulations.php"> <?php
                     // sing out

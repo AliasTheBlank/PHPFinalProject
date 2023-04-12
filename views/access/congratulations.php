@@ -22,7 +22,7 @@
         <div>
 
         <h1>You have won!</h1>
-        <a href="./login">Log out?</a> <br>
+        <a href="./singout.php">Log out?</a> <br>
         <a href="./restart.php">Try again?</a>
 
 

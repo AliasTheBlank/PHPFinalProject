@@ -1,5 +1,5 @@
 <?php
-    include_once ("../../Classes/Db.php");
+    include_once ("../Classes/Db.php");
 
     function GenerateLetter() {
         $myArray = array();
@@ -87,6 +87,15 @@
         if (!isset($_SESSION['registrationOrder'])) {
             ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/login.php"> <?php
         }
+    }
+
+    function CheckSessionViews() {
+        if (!isset($_SESSION['registrationOrder'])) {
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/login.php"> <?php
+            return false;
+        }
+
+        return true;
     }
 
     function CheckCorrectLevel(int $level) {
