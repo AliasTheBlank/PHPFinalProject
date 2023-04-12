@@ -1,10 +1,14 @@
 <?php include_once ("../header.php"); 
     include_once ("../functions.php");
     include_once ("../footer.php");
+
+    if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
     
     CheckSession();
     CheckCorrectLevel(2);
     CheckLost();
+    //var_dump($_SESSION['livesUsed']);
     ?>
 
 <!DOCTYPE html>

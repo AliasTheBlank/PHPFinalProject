@@ -1,4 +1,4 @@
-<?php require_once "../../Classes/Db.php"; ?>
+<?php require_once "../../Classes/Db.php"; session_start(); session_destroy();?>
 <!DOCTYPE html>
 <html>
     <head><title>Final Project</title></head>
@@ -63,7 +63,8 @@
             
             if ($each_row['count(*)'] == 1) {
                 session_start();
-                $_SESSION['registrationOrder'] = $each_row['registrationOrder'];
+
+                $_SESSION['registrationOrder'] = $each_row["registrationOrder"];
                 $_SESSION['livesUsed'] = 0;
                 $_SESSION['level'] = 1;
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../Games/level1.php"> <?php
