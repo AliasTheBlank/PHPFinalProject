@@ -61,7 +61,12 @@
 
         <?php } else { 
 
-            if ($_POST['password'] != $_POST['confirmpassword'])
+            $password = $_POST['password'];
+            $confirmPassword = $_POST['confirmpassword'];
+
+            $passwordEncrypted = password_hash($password,PASSWORD_DEFAULT);
+
+            if ( $password != $confirmPassword)
             {
                 unset($_POST['send']);
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=register.php?validation=true"> <?php
@@ -88,14 +93,13 @@
             }
 
             else {
-            $password = $_POST['password'];
             $fName = $_POST['fName'];
             $lName = $_POST['lName'];
             date_default_timezone_set('America/Toronto');
             $registrationTime = date("Y-m-d h:i:sa");
 
             $value = $connection->query("INSERT INTO player(fName, lName, userName, registrationTime, password)
-            VALUES('".$fName."', '".$lName."', '".$username."', '".$registrationTime."', '".$password."')");
+            VALUES('".$fName."', '".$lName."', '".$username."', '".$registrationTime."', '".$passwordEncrypted."')");
 
             ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?usercreated=true"> <?php
             }

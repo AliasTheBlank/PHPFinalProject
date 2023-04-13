@@ -41,7 +41,7 @@
 
             <label >
                 <p>Password:</p>
-                <input type="text" name="password" required="require">
+                <input type="password" name="password" required="require">
             </label>
 
             <input type="submit" value="Login" name="send">
@@ -61,7 +61,9 @@
             $userName = $_POST['username'];
             $password = $_POST['password'];
 
-            $result = $connection->query("Select count(*), registrationOrder from player where userName = '".$userName."' and password = '".$password."'");
+            $passwordEncrypted = password_hash($password,PASSWORD_DEFAULT);
+
+            $result = $connection->query("Select count(*), registrationOrder from player where userName = '".$userName."' and password = '".$passwordEncrypted."'");
 
             $each_row = $result->fetch_array(MYSQLI_ASSOC);
             
