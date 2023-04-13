@@ -9,6 +9,9 @@
 
         <?php 
         
+        $message = isset($_GET['error']) && $_GET['error'] === "true" ? "User and password doesn't match" : null;
+        ?> <h2><?=$message?></h2> <?php
+
         $usercreated = false;
         if (isset($_GET['usercreated'])) {
             $usercreated = $_GET['usercreated'];
@@ -70,7 +73,7 @@
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../Games/level1.php"> <?php
             }
             else{
-                ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php"> <?php
+                ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?error=true"> <?php
             }
             
 
