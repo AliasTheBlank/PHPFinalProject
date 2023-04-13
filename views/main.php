@@ -1,5 +1,5 @@
 <?php 
-include_once ("./functions.php"); 
+include_once ($_SERVER['DOCUMENT_ROOT'].'/views/functions.php'); 
 
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();

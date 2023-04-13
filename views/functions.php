@@ -1,5 +1,5 @@
 <?php
-    include_once ("../Classes/Db.php");
+    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/functions.php');
 
     function GenerateLetter() {
         $myArray = array();
