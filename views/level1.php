@@ -1,7 +1,7 @@
 <?php
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/header.php');
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/functions.php'); 
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/footer.php');
+    include_once ('./header.php');
+    include_once ('../controllers/functions.php'); 
+    include_once ('./footer.php');
 
 
   if (session_status() !== PHP_SESSION_ACTIVE)
@@ -64,12 +64,12 @@
                 if ($letters === $arrayAnswer) {
                     echo "congrats";
                     $_SESSION['level'] += 1;
-                    ?> <a href="level2.php">Go the Next Level</a> <?php
+                    ?> <a href="main.php">Go the Next Level</a> <?php
                 }
                 else {
                     echo "fail";
                     $_SESSION['livesUsed'] += 1;
-                    ?> <a href="level1.php">Try again</a> <?php
+                    ?> <a href="main.php">Try again</a> <?php
                 }
                 ?>
                 

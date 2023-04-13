@@ -1,4 +1,4 @@
-<?php require_once "../../Classes/Db.php"; session_start(); session_destroy();?>
+<?php require_once "../models/Db.php";?>
 <!DOCTYPE html>
 <html>
     <head><title>Final Project</title></head>
@@ -7,6 +7,7 @@
         <h1>Welcome to our php final project</h1>
         <hr>
 
+        <a href="./history.php">History</a>
         <?php 
         
         $message = isset($_GET['error']) && $_GET['error'] === "true" ? "User and password doesn't match" : null;
@@ -70,7 +71,7 @@
                 $_SESSION['registrationOrder'] = $each_row["registrationOrder"];
                 $_SESSION['livesUsed'] = 0;
                 $_SESSION['level'] = 1;
-                ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../Games/level1.php"> <?php
+                ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./level1.php"> <?php
             }
             else{
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?error=true"> <?php

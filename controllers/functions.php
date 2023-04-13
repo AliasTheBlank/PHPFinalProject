@@ -1,5 +1,5 @@
 <?php
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/functions.php');
+    require_once("../models/Db.php");
 
     function GenerateLetter() {
         $myArray = array();
@@ -25,19 +25,13 @@
         return $myArray;
     }
 
-    function LossGame() {
-        
-        AddScore('failure');
-    }
-
     function IncompleteGame() {
         AddScore('incomplete');
-        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/login.php"> <?php
+        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/login.php"> <?php
     }
 
     function WinGame() {
         AddScore('success');
-        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/congratulations.php"> <?php
     }
 
     function AddScore($result) {
@@ -47,7 +41,7 @@
         $connection = $dbHander->getDataBase();
 
         date_default_timezone_set('America/Toronto');
-        $Time = date("Y-m-d h:i:sa");
+        $Time = date("Y-m-d H:i:s");
 
         $lives = $_SESSION['livesUsed'];
         $registrationOrder = $_SESSION['registrationOrder'];
@@ -79,19 +73,19 @@
     }
 
     function LostCase() {
-        LossGame();
-        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/lost.php"> <?php
+        AddScore('failure');
+        ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/lost.php"> <?php
     }
 
     function CheckSession() {
         if (!isset($_SESSION['registrationOrder'])) {
-            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../access/login.php"> <?php
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/login.php"> <?php
         }
     }
 
     function CheckSessionViews() {
         if (!isset($_SESSION['registrationOrder'])) {
-            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/login.php"> <?php
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./views/login.php"> <?php
             return false;
         }
 
@@ -100,7 +94,7 @@
 
     function CheckCorrectLevel(int $level) {
         if ($_SESSION['level'] != $level) {
-            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../main.php"> <?php
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/main.php"> <?php
         }
     }
 ?>

@@ -1,5 +1,5 @@
 <?php 
-include_once ($_SERVER['DOCUMENT_ROOT'].'/views/functions.php'); 
+include_once ('../controllers/functions.php'); 
 
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
@@ -7,14 +7,14 @@ if (session_status() !== PHP_SESSION_ACTIVE)
 if (CheckSessionViews()) {
 
     switch ($_SESSION['level']) {
-        case 1 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level1.php"> <?php
-        case 2 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level2.php"> <?php
-        case 3 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level3.php"> <?php
-        case 4 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level4.php"> <?php
-        case 5 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level5.php"> <?php
-        case 6 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./Games/level6.php"> <?php
-        case 7 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/congratulations.php"> <?php
-        default : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./access/login.php"> <?php
+        case 1 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/level1.php"> <?php break;
+        case 2 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/level2.php"> <?php break;
+        case 3 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/level3.php"> <?php break;
+        case 4 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/level4.php"> <?php break;
+        case 5 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/level5.php"> <?php break;
+        case 6 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/level6.php"> <?php break;
+        case 7 : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/congratulations.php"> <?php break;
+        default : ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/login.php"> <?php break;
     }
 }
 

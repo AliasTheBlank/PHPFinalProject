@@ -2,6 +2,7 @@
 
 $_SESSION['livesUsed'] = 0;
 $_SESSION['level'] = 1;
+$_SESSION['recordedWin'] = false;
 
 ?>
 

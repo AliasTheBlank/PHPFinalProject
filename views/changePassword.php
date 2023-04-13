@@ -1,4 +1,4 @@
-<?php require_once "../../Classes/Db.php"; ?>
+<?php require_once "../models/Db.php"; ?>
 <!DOCTYPE html>
 <html>
     <head><title>Final Project</title></head>

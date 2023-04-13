@@ -1,23 +1,24 @@
-<?php 
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/header.php');
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/functions.php'); 
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/footer.php');
+<?php
+    include_once ('./header.php');
+    include_once ('../controllers/functions.php'); 
+    include_once ('./footer.php');
 
     if (session_status() !== PHP_SESSION_ACTIVE)
-    session_start();
-    
+      session_start();
+      
     CheckSession();
-    CheckCorrectLevel(2);
-    CheckLost();
+    CheckCorrectLevel(5);
+
     //var_dump($_SESSION['livesUsed']);
-    ?>
+    CheckLost();
+?>
 
 <!DOCTYPE html>
 <html>
-    <?php DisplayHeader("Level 2"); ?>
+    <body>
+        <?php DisplayHeader("Level 5"); ?>
 
-
-    <div>
+        <div>
             <?php if (!isset($_POST['send'])) { ?>
                 
                 <?php $letters = GenerateLetter(); 
@@ -26,7 +27,7 @@
                 }
                 ?>
 
-                <form action="level2.php" method="post" id="form1">
+                <form action="level5.php" method="post" id="form1">
 
                     <input type="text" name="answer" id="inputanswer" placeholder="Your answer">
 
@@ -42,7 +43,7 @@
 
             <?php } else { ?>
                 <?php $letters = $_POST['values'];
-                rsort($letters);
+                sort($letters);
                 foreach ($letters as $i) {
                     echo $i;
                 }
@@ -58,26 +59,26 @@
 
                 
                 echo "<br>";
-                if ($letters === $arrayAnswer) {
+                if (count($arrayAnswer) == 2 && $arrayAnswer[0] == $letters[0] && $arrayAnswer[1] == $letters[5]) {
                     echo "congrats";
+                    // add result to player
+
                     $_SESSION['level'] += 1;
-                    ?> <a href="level3.php">Go the Next Level</a> <?php
+                    ?> <a href="level6.php">Go the Next Level</a> <?php
                 }
                 else {
                     echo "fail";
-                    // the player lies - 1;
+                    // the player lies - 1 
                     $_SESSION['livesUsed'] += 1;
 
-                    ?> <a href="level2.php">Try again</a> <?php
+                    ?> <a href="level5.php">Try again</a> <?php
                 }
                 ?>
                 
             <?php } ?>
         </div>
-
         <?php DisplayFooterGames() ?>
 
     </body>
 </html>
-
 

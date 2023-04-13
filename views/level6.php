@@ -1,21 +1,22 @@
 <?php 
+    include_once ('./header.php');
+    include_once ('../controllers/functions.php'); 
+    include_once ('./footer.php');
 
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/header.php');
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/functions.php'); 
-    include_once ($_SERVER['DOCUMENT_ROOT'].'/views/footer.php');
-    
     if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
     
+
     CheckSession();
+    CheckCorrectLevel(6);
 
     CheckLost();
-    //var_dump($_SESSION['livesUsed']);
+    
     ?>
 
 <!DOCTYPE html>
 <html>
-    <?php DisplayHeader("Level 3"); ?>
+    <?php DisplayHeader("Level 6"); ?>
 
     <div>
             <?php if (!isset($_POST['send'])) { ?>
@@ -26,7 +27,7 @@
                 }
                 ?>
 
-                <form action="level3.php" method="post" id="form1">
+                <form action="level6.php" method="post" id="form1">
 
                     <input type="text" name="answer" id="inputanswer" placeholder="Your answer please">
 
@@ -41,12 +42,12 @@
             
 
             <?php } else { ?>
-                <?php $numbers = $_POST['values'];
-                sort($numbers);
-                for ($i = 0; $i < count($numbers); $i++) {
-                    $numbers[$i] = intval($numbers[$i]);
-                    echo $numbers[$i] . " ";
+                <?php $number = $_POST['values'];
+                sort($number);
+                foreach ($number as $i) {
+                    echo $i . " ";
                 }
+
                 echo "<br>";
                 $arrayAnswer = explode(" ", $_POST['answer']);
                 $arrayAnswerNumber = array();
@@ -56,19 +57,19 @@
                     echo $arrayAnswerNumber[$i] . " ";
                 }
 
+                
                 echo "<br>";
-                if ($numbers === $arrayAnswerNumber) {
-                    echo "congrats";
+                if (count($arrayAnswerNumber) == 2 && $arrayAnswerNumber[0] == $number[0] && $arrayAnswerNumber[1] == $number[5]) { 
                     $_SESSION['level'] += 1;
-                    ?> <a href="level4.php">Go the Next Level</a> <?php
+                    WinGame();
+                    ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./main.php"> <?php
+                    // sing out
                 }
                 else {
                     echo "fail";
                     // the player lies - 1;
                     $_SESSION['livesUsed'] += 1;
-
-                    ?> <a href="level3.php">Try again</a> <?php
-
+                    ?> <a href="main.php">Try again?</a> <?php
                 }
                 ?>
                 
