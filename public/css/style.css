@@ -1,0 +1,51 @@
+.forms{
+    background-color: gainsboro;
+    padding: 30px ;
+    margin: 10px;
+
+}
+.loginButton {
+    padding-right: 5px; 
+}
+body h1{
+    background-color: gainsboro;
+}
+h2 a{
+    top: 15px;
+    right: 15px;
+    color: black;
+    background-color: gainsboro;
+}
+.divs{
+    border: 3px solid black;
+    width: 30%;
+    margin: 20px;
+}
+.history{
+    right: 10px;
+    font-size: 30px;
+    color: black;
+}
+.links{
+    background-color: gainsboro;
+    font-size: 30px;
+    color: black;
+    width: 30%;
+
+}
+.links a{
+    color: black;
+    width: 30%;
+}
+.footer{
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 20px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+    background-color: gainsboro;
+    width: 100%;
+    margin-top: 20em;
+
+}

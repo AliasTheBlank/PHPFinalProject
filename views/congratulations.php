@@ -6,8 +6,11 @@
     if (session_status() !== PHP_SESSION_ACTIVE)
         session_start();
 
-    CheckCorrectLevel(7);
-    AddScore('success');
+    if (CheckSession() && CheckCorrectLevel(7)) {
+    
+    if (!isset($_SESSION['recordedWin'])) {
+        AddScore('success');
+    }
 
 ?>
 
@@ -19,12 +22,12 @@
         <div>
 
         <h1>You have won!</h1>
-        <a href="./singout.php">Log out?</a> <br>
-        <a href="./restart.php">Try again?</a>
+        <a href="../controllers/singout.php">Log out?</a> <br>
+        <a href="../controllers/restart.php">Try again?</a>
 
 
         </div>
 
-        <?php DisplayFooterGames() ?>
+        <?php DisplayFooterGames(); } ?>
     </body>
 </html>

@@ -4,11 +4,10 @@
     include_once ('./footer.php');
 
     if (session_status() !== PHP_SESSION_ACTIVE)
-    session_start();
+        session_start();
     
 
-    CheckSession();
-    CheckCorrectLevel(6);
+    if (CheckSession() && CheckCorrectLevel(6)) {
 
     CheckLost();
     
@@ -21,6 +20,7 @@
     <div>
             <?php if (!isset($_POST['send'])) { ?>
                 
+                <h1>Sort the numbers, but just insert the first one and the last one.(Example: 1 100)</h1>
                 <?php $letters = GenerateNumbers(); 
                 foreach ($letters as $i) {
                     echo $i . " ";
@@ -44,14 +44,17 @@
             <?php } else { ?>
                 <?php $number = $_POST['values'];
                 sort($number);
-                foreach ($number as $i) {
-                    echo $i . " ";
-                }
+                echo "Expected: " . $number[0] . " " . $number[5];
+
 
                 echo "<br>";
-                $arrayAnswer = explode(" ", $_POST['answer']);
+                $answer = trim($answer);
+                $answer = str_replace(',', ' ', $answer);
+                $answer = str_replace('  ', ' ', $answer);
+                $arrayAnswer = explode(" ", $answer);
                 $arrayAnswerNumber = array();
 
+                echo "Inserted: ";
                 for ($i = 0; $i < count($arrayAnswer); $i++) {
                     array_push($arrayAnswerNumber, intval($arrayAnswer[$i]));
                     echo $arrayAnswerNumber[$i] . " ";
@@ -75,7 +78,7 @@
                 
             <?php } ?>
         </div>
-        <?php DisplayFooterGames() ?>
+        <?php DisplayFooterGames(); } ?>
 
     </body>
 </html>

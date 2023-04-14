@@ -4,7 +4,7 @@ include_once ("./functions.php");
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-if (CheckTries())
+if (CheckTries() && $_SESSION['level'] != 7)
     AddScore("incomplete");
 
 session_destroy();

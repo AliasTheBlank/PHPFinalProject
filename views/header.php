@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../public/css/style.css">
 <?php 
 
 function DisplayHeader(string $message) {

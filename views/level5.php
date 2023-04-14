@@ -6,10 +6,8 @@
     if (session_status() !== PHP_SESSION_ACTIVE)
       session_start();
       
-    CheckSession();
-    CheckCorrectLevel(5);
+    if (CheckSession() && CheckCorrectLevel(5)) {
 
-    //var_dump($_SESSION['livesUsed']);
     CheckLost();
 ?>
 
@@ -21,6 +19,7 @@
         <div>
             <?php if (!isset($_POST['send'])) { ?>
                 
+                <h1>Sort the letter is alphabetic number, but just insert the first one and the last one.(Example: A Z)</h1>
                 <?php $letters = GenerateLetter(); 
                 foreach ($letters as $i) {
                     echo $i . " ";
@@ -44,17 +43,18 @@
             <?php } else { ?>
                 <?php $letters = $_POST['values'];
                 sort($letters);
-                foreach ($letters as $i) {
-                    echo $i;
-                }
+                echo "Expected: " . $letters[0] . " " . $letters[5];
 
                 echo "<br>";
-                $answer = $_POST['answer'];
+                $answer = trim($answer);
+                $answer = str_replace(',', ' ', $answer);
+                $answer = str_replace('  ', ' ', $answer);
                 $arrayAnswer = explode(" ", $answer);
 
+                echo "Inserted: ";
                 for ($i = 0; $i < count($arrayAnswer); $i++) {
                     $arrayAnswer[$i] = str_replace(' ', '', $arrayAnswer[$i]);
-                    echo $arrayAnswer[$i];
+                    echo $arrayAnswer[$i] . " ";
                 }
 
                 
@@ -77,7 +77,7 @@
                 
             <?php } ?>
         </div>
-        <?php DisplayFooterGames() ?>
+        <?php DisplayFooterGames(); } ?>
 
     </body>
 </html>

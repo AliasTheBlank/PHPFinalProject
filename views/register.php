@@ -1,7 +1,19 @@
-<?php require_once "../models/Db.php"; ?>
+<?php require_once "../models/Db.php"; 
+
+if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
+
+if (isset($_SESSION['level'])) {
+    ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/main.php"> <?php
+}
+else {
+?>
 <!DOCTYPE html>
 <html>
-    <head><title>Final Project</title></head>
+    <head>
+        <title>Final Project</title>
+        <link rel="stylesheet" href="../public/css/style.css">
+    </head>
 
     <body>
         <h1>Welcome to our php final project</h1>
@@ -27,7 +39,8 @@
                     ?> <h1>This username already exists</h1> <?php
                 }
                 ?>
-            <form action="register.php" method="post">
+            <div class="divs">
+            <form class ="forms" action="register.php" method="post">
                 <label >
                     <p>Name:</p>
                     <input type="text" name="fName" required="require">
@@ -55,9 +68,11 @@
 
                 <input type="submit" value="Register" name="send">
             </form>
-            
+            </div>
+            <div class="links">
             <a href="./login.php">Already have an account? Log in!</a> <br>
             <a href="./changePassword.php">Forgot your password? Change it!</a>
+            </div>
 
         <?php } else { 
 
@@ -103,6 +118,6 @@
 
             ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?usercreated=true"> <?php
             }
-        } ?>
+        } }?>
     </body>
 </html>

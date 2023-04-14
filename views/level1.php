@@ -7,8 +7,7 @@
   if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-    CheckSession();
-    CheckCorrectLevel(1);
+    if (CheckSession() && CheckCorrectLevel(1)) {
 
     CheckLost();
     
@@ -23,6 +22,7 @@
         <div>
             <?php if (!isset($_POST['send'])) { ?>
                 
+                <h1>Sort the letter is alphabetic number.(Example: A B C D E F)</h1>
                 <?php $letters = GenerateLetter(); 
                 foreach ($letters as $i) {
                     echo $i . " ";
@@ -46,17 +46,22 @@
             <?php } else { ?>
                 <?php $letters = $_POST['values'];
                 sort($letters);
+                echo "Expexted: ";
                 foreach ($letters as $i) {
-                    echo $i;
+                    echo $i . " ";
                 }
 
                 echo "<br>";
                 $answer = $_POST['answer'];
+                $answer = trim($answer);
+                $answer = str_replace(',', ' ', $answer);
+                $answer = str_replace('  ', ' ', $answer);
                 $arrayAnswer = explode(" ", $answer);
 
+                echo "Inserted: ";
                 for ($i = 0; $i < count($arrayAnswer); $i++) {
                     $arrayAnswer[$i] = str_replace(' ', '', $arrayAnswer[$i]);
-                    echo $arrayAnswer[$i];
+                    echo $arrayAnswer[$i] . " ";
                 }
 
                 
@@ -76,7 +81,7 @@
             <?php } ?>
         </div>
 
-        <?php DisplayFooterGames() ?>
+        <?php DisplayFooterGames(); } ?>
     </body>
 </html>
 

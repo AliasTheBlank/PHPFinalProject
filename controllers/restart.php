@@ -1,9 +1,14 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE)
+session_start();
 
 $_SESSION['livesUsed'] = 0;
 $_SESSION['level'] = 1;
-$_SESSION['recordedWin'] = false;
+
+if (isset($_SESSION['recordedWin'])){
+    unset($_SESSION['recordedWin']);
+}
 
 ?>
 
-<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../Games/level1.php">
+<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/main.php">

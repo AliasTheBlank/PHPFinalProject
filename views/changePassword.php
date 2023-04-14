@@ -1,7 +1,19 @@
-<?php require_once "../models/Db.php"; ?>
+<?php require_once "../models/Db.php"; 
+
+if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
+
+if (isset($_SESSION['level'])) {
+    ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/main.php"> <?php
+}
+else {
+?>
 <!DOCTYPE html>
 <html>
-    <head><title>Final Project</title></head>
+    <head>
+        <link rel="stylesheet" href="../public/css/style.css">
+        <title>Final Project</title>
+    </head>
 
     <body>
         <h1>Welcome to our php final project</h1>
@@ -27,7 +39,8 @@
                     ?> <h1>This username doesn't exists</h1> <?php
                 }
                 ?>
-            <form action="changePassword.php" method="post">
+            <div class="divs">
+            <form class="forms" action="changePassword.php" method="post">
                 <label>
                     <p>Username:</p>
                     <input type="text" required="require" name="username">
@@ -45,9 +58,11 @@
                 <br>
                 <input type="submit" value="Change password" name="send">
             </form>
-            
+            </div>
+            <div class="links">
             <a href="./login.php">Already have an account? Log in!</a> <br>
             <a href="./register.php">Don't have an account? Sing up!</a>
+            </div>
 
         <?php } else { 
 
@@ -81,6 +96,6 @@
 
             ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?passwordchange=true"> <?php
             }
-        } ?>
+        } }?>
     </body>
 </html>

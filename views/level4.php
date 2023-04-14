@@ -7,8 +7,8 @@
         session_start();
 
     
-    CheckSession();
-    CheckCorrectLevel(4);
+    if (CheckSession() && CheckCorrectLevel(4)) {
+    
     CheckLost();
     //var_dump($_SESSION['livesUsed']);
     ?>
@@ -20,6 +20,7 @@
     <div>
             <?php if (!isset($_POST['send'])) { ?>
                 
+                <h1>Invert sort the numbers.(Example: 6 5 4 3 2 1)</h1>
                 <?php $letters = GenerateNumbers(); 
                 foreach ($letters as $i) {
                     echo $i . " ";
@@ -43,14 +44,19 @@
             <?php } else { ?>
                 <?php $numbers = $_POST['values'];
                 rsort($numbers);
+                echo "Expected: ";
                 for ($i = 0; $i < count($numbers); $i++) {
                     $numbers[$i] = intval($numbers[$i]);
                     echo $numbers[$i] . " ";
                 }
                 echo "<br>";
-                $arrayAnswer = explode(" ", $_POST['answer']);
+                $answer = trim($answer);
+                $answer = str_replace(',', ' ', $answer);
+                $answer = str_replace('  ', ' ', $answer);
+                $arrayAnswer = explode(" ", $answer);
                 $arrayAnswerNumber = array();
 
+                echo "Inserted: ";
                 for ($i = 0; $i < count($arrayAnswer); $i++) {
                     array_push($arrayAnswerNumber, intval($arrayAnswer[$i]));
                     echo $arrayAnswerNumber[$i] . " ";
@@ -74,7 +80,7 @@
                 
             <?php } ?>
         </div>
-        <?php DisplayFooterGames() ?>
+        <?php DisplayFooterGames(); } ?>
 
     </body>
 </html>

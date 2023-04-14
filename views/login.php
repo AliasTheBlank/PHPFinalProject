@@ -1,13 +1,26 @@
-<?php require_once "../models/Db.php";?>
+<?php require_once "../models/Db.php";
+require_once "../controllers/functions.php";
+
+if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
+
+if (isset($_SESSION['level'])) {
+    ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/main.php"> <?php
+}
+else {
+?>
 <!DOCTYPE html>
 <html>
-    <head><title>Final Project</title></head>
+    <head>
+        <link rel="stylesheet" href="../public/css/style.css">
+        <title>Final Project</title>
+    </head>
 
     <body>
         <h1>Welcome to our php final project</h1>
         <hr>
 
-        <a href="./history.php" style="right: 5px; top:20px ; position:absolute">History</a>
+        <a class = "history" href="./history.php" style=" top:20px ; position:absolute">History</a>
         <?php 
         
         $message = isset($_GET['error']) && $_GET['error'] === "true" ? "This user doesn't exist" : null;
@@ -36,7 +49,8 @@
                 ?>  <h1>Password change</h1> <?php
             }
         ?>
-        <form action="login.php" method="post">
+        <div class="divs">
+        <form class="forms" action="login.php" method="post">
             <label>
                 <p>Username:</p>
                 <input type="text" required="require" name="username">
@@ -49,9 +63,11 @@
 
             <input type="submit" value="Login" name="send">
         </form>
-        
-        <a href="./register.php">Don't have an account? Sing up!</a> <br>
-        <a href="./changePassword.php">Forgot your password? Change it!</a>
+        </div>
+        <div class="links">
+        <a class="singUp" href="./register.php">Don't have an account? Sing up!</a> <br>
+        <a class="passwordChange" href="./changePassword.php">Forgot your password? Change it!</a>
+        </div>
 
         <?php } else {
 
@@ -72,8 +88,6 @@
 
                 if (password_verify($password, $each_row['password'])) {
 
-                session_start();
-
                 $_SESSION['registrationOrder'] = $each_row["registrationOrder"];
                 $_SESSION['livesUsed'] = 0;
                 $_SESSION['level'] = 1;
@@ -90,6 +104,6 @@
             }
 
 
-        } ?>
+        } }?>
     </body>
 </html>

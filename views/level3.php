@@ -7,10 +7,9 @@ include_once ('./footer.php');
     if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
     
-    CheckSession();
+    if (CheckSession() && CheckCorrectLevel(3)) {
 
     CheckLost();
-    //var_dump($_SESSION['livesUsed']);
     ?>
 
 <!DOCTYPE html>
@@ -20,6 +19,7 @@ include_once ('./footer.php');
     <div>
             <?php if (!isset($_POST['send'])) { ?>
                 
+                <h1>Sort the numbers.(Example: 1 2 3 4 5 6)</h1>
                 <?php $letters = GenerateNumbers(); 
                 foreach ($letters as $i) {
                     echo $i . " ";
@@ -43,14 +43,19 @@ include_once ('./footer.php');
             <?php } else { ?>
                 <?php $numbers = $_POST['values'];
                 sort($numbers);
+                echo "Expected: ";
                 for ($i = 0; $i < count($numbers); $i++) {
                     $numbers[$i] = intval($numbers[$i]);
                     echo $numbers[$i] . " ";
                 }
                 echo "<br>";
-                $arrayAnswer = explode(" ", $_POST['answer']);
+                $answer = trim($answer);
+                $answer = str_replace(',', ' ', $answer);
+                $answer = str_replace('  ', ' ', $answer);
+                $arrayAnswer = explode(" ", $answer);
                 $arrayAnswerNumber = array();
 
+                echo "Inserted: ";
                 for ($i = 0; $i < count($arrayAnswer); $i++) {
                     array_push($arrayAnswerNumber, intval($arrayAnswer[$i]));
                     echo $arrayAnswerNumber[$i] . " ";
@@ -74,7 +79,7 @@ include_once ('./footer.php');
                 
             <?php } ?>
         </div>
-        <?php DisplayFooterGames() ?>
+        <?php DisplayFooterGames(); } ?>
 
     </body>
 </html>

@@ -18,7 +18,7 @@
         $myArray = array();
 
         for ($i = 0; $i < 6; $i++) {
-            $number= rand(0, 100);
+            $number= rand(0, 101);
             array_push($myArray, $number);
         }
 
@@ -47,6 +47,9 @@
         $registrationOrder = $_SESSION['registrationOrder'];
         $connection->query("INSERT INTO score VALUES ('".$Time."', '".$result."', '".$lives."', '".$registrationOrder."')");
 
+        if ($result == 'success') {
+            $_SESSION['recordedWin']= true;
+        }
     }
 
     function ResetStats() {
@@ -80,12 +83,15 @@
     function CheckSession() {
         if (!isset($_SESSION['registrationOrder'])) {
             ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/login.php"> <?php
+            return false;
         }
+
+        return true;
     }
 
     function CheckSessionViews() {
         if (!isset($_SESSION['registrationOrder'])) {
-            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./views/login.php"> <?php
+            ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/login.php"> <?php
             return false;
         }
 
@@ -93,8 +99,11 @@
     }
 
     function CheckCorrectLevel(int $level) {
-        if ($_SESSION['level'] != $level) {
+        if (!isset($_SESSION['level']) || $_SESSION['level'] != $level) {
             ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../views/main.php"> <?php
+            return false;
         }
+
+        return true;
     }
 ?>
