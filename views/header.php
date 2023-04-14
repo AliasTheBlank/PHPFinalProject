@@ -10,7 +10,8 @@ function DisplayHeader(string $message) {
 
     <div>
         <h1><?=$message?></h1>
-        <a href="../controllers/singout.php">Sing Out</a>
+        <h2><a href="../controllers/singout.php" style="right: 5px; top:20px ; position:absolute">Sing Out</a></h2>
+       
     </div>
     <hr>
 

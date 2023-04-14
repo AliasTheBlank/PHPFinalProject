@@ -7,10 +7,13 @@
         <h1>Welcome to our php final project</h1>
         <hr>
 
-        <a href="./history.php">History</a>
+        <a href="./history.php" style="right: 5px; top:20px ; position:absolute">History</a>
         <?php 
         
-        $message = isset($_GET['error']) && $_GET['error'] === "true" ? "User and password doesn't match" : null;
+        $message = isset($_GET['error']) && $_GET['error'] === "true" ? "This user doesn't exist" : null;
+        ?> <h2><?=$message?></h2> <?php
+
+        $message = isset($_GET['password']) && $_GET['password'] === "true" ? "Forgot your password? <a href=\"./changePassword.php\">Change it!</a>" : null;
         ?> <h2><?=$message?></h2> <?php
 
         $usercreated = false;
@@ -61,24 +64,30 @@
             $userName = $_POST['username'];
             $password = $_POST['password'];
 
-            $passwordEncrypted = password_hash($password,PASSWORD_DEFAULT);
-
-            $result = $connection->query("Select count(*), registrationOrder from player where userName = '".$userName."' and password = '".$passwordEncrypted."'");
+            $result = $connection->query("Select count(*), registrationOrder, password from player where userName = '".$userName."'");
 
             $each_row = $result->fetch_array(MYSQLI_ASSOC);
             
-            if ($each_row['count(*)'] == 1) {
+            if ($each_row['count(*)'] == 1 ) {
+
+                if (password_verify($password, $each_row['password'])) {
+
                 session_start();
 
                 $_SESSION['registrationOrder'] = $each_row["registrationOrder"];
                 $_SESSION['livesUsed'] = 0;
                 $_SESSION['level'] = 1;
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=./level1.php"> <?php
+
+                }
+
+                else {
+                    ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?password=true"> <?php
+                }
             }
             else{
                 ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?error=true"> <?php
             }
-            
 
 
         } ?>

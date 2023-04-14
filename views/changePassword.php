@@ -75,8 +75,9 @@
 
             else {
             $password = $_POST['password'];
+            $passwordEncrypted = password_hash($password,PASSWORD_DEFAULT);
 
-            $value = $connection->query("UPDATE player SET password = '".$password."' where userName = '".$username."'");
+            $value = $connection->query("UPDATE player SET password = '".$passwordEncrypted."' where userName = '".$username."'");
 
             ?> <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=login.php?passwordchange=true"> <?php
             }
