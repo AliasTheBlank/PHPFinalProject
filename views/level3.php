@@ -49,7 +49,7 @@ include_once ('./footer.php');
                     echo $numbers[$i] . " ";
                 }
                 echo "<br>";
-                $answer = trim($answer);
+                $answer = trim($_POST['answer']);
                 $answer = str_replace(',', ' ', $answer);
                 $answer = str_replace('  ', ' ', $answer);
                 $arrayAnswer = explode(" ", $answer);

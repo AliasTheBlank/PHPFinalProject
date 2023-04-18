@@ -11,8 +11,8 @@
 
         <div>
 
-        <a href="./login">Log out?</a> <br>
-        <a href="./restart.php">Try again?</a>
+        <a href="../controllers/singout.php">Log out?</a> <br>
+        <a href="../controllers/restart.php">Try again?</a>
 
 
         </div>

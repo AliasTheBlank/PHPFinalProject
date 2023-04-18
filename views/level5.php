@@ -46,7 +46,7 @@
                 echo "Expected: " . $letters[0] . " " . $letters[5];
 
                 echo "<br>";
-                $answer = trim($answer);
+                $answer = trim($_POST['answer']);
                 $answer = str_replace(',', ' ', $answer);
                 $answer = str_replace('  ', ' ', $answer);
                 $arrayAnswer = explode(" ", $answer);
